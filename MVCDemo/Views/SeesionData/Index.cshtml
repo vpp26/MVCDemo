@@ -1,0 +1,53 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    @{ 
+        //when we use keep
+        //TempData.Keep("datalistviewdata");
+        //and then
+        //    var vd = (List<string>)TempData["datalistviewdata"];
+        //Peek does in one step
+
+        var vd = (List<string>)TempData.Peek("datalistviewdata");
+    } 
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div> 
+        ViewData For seding data in same HTTP request, while redirection value becomes null and this does not have property keep or method peek : @ViewData["viewdataExample"]
+        <br />
+        TempData without pick or keep value will null in subsequent request :@TempData["tempdataexample"]
+        <br/>
+        For seding data in subsequent request with peek method (we can use keep property)
+        @{ 
+            foreach(var s in vd )
+            {
+
+                @s <br/>
+            }
+
+        }
+    </div>
+
+    @using (Html.BeginForm())
+    { 
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            @Html.Label("Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Editor("NAme", new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessage("Name","", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                                   <input type="submit" value="submit" class="btn btn-default" />
+                 </div>
+    }
+</body>
+</html>

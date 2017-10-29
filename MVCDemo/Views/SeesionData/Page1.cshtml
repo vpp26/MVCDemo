@@ -1,0 +1,37 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    @{
+
+        var vd = (List<string>)TempData["datalistviewdata"]; 
+    }
+    <meta name="viewport" content="width=device-width" />
+    <title>Page1</title>
+</head>
+<body>
+    <div>
+        ViewData For seding data in same HTTP request, while redirection value becomes null  : @ViewData["viewdataExample"]
+        <br />
+        TempData without pick or keep value will null in subsequent request :@TempData["tempdataexample"]
+        <br />
+        For seding data in subsequent request with peek
+        @{
+            foreach (var s in vd)
+            {
+
+                @s <br />
+            }
+
+        }
+
+        Input string : @TempData["name"]
+    </div>
+    @Html.ActionLink("Back", "Index")
+</body>
+</html>
